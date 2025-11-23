@@ -2,7 +2,5 @@ using UnityEngine;
 
 namespace Core
 {
-    public class ItemBase : MonoBehaviour
-    {
-    }
+    public class ItemBase : MonoBehaviour { }
 }

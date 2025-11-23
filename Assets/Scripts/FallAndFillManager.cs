@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Core;
 using UnityEngine;
 
 namespace Core
@@ -20,17 +19,12 @@ namespace Core
 
         private void CreateFillingCells()
         {
-            var cellList = new List<Cell>();
-            for (var y = 0; y < _board.boardData.rowCount; y++)
+            List<Cell> cellList = new();
+            for (int y = 0; y < _board.boardData.rowCount; y++)
+            for (int x = 0; x < _board.boardData.columnCount; x++)
             {
-                for (var x = 0; x < _board.boardData.columnCount; x++)
-                {
-                    var cell = _board.Cells[x, y];
-                    if (cell != null && cell.IsFillingCell)
-                    {
-                        cellList.Add(cell);
-                    }
-                }
+                Cell cell = _board.Cells[x, y];
+                if (cell != null && cell.IsFillingCell) cellList.Add(cell);
             }
 
             _fillingCells = cellList.ToArray();
@@ -48,35 +42,30 @@ namespace Core
 
         private void DoFalls()
         {
-            var rows = _board.boardData.rowCount;
-            var cols = _board.boardData.columnCount;
+            int rows = _board.boardData.rowCount;
+            int cols = _board.boardData.columnCount;
 
-            for (var y = 0; y < rows; y++)
+            for (int y = 0; y < rows; y++)
+            for (int x = 0; x < cols; x++)
             {
-                for (var x = 0; x < cols; x++)
-                {
-                    var cell = _board.Cells[x, y];
-                    if (cell == null) continue;
+                Cell cell = _board.Cells[x, y];
+                if (cell == null) continue;
 
-                    var item = cell.Item;
-                    if (item == null) continue;
+                Item item = cell.Item;
+                if (item == null) continue;
 
-                    var below = cell.FirstCellBelow;
-                    if (below != null && !below.IsBusy && below.Item == null)
-                    {
-                        item.Fall();
-                    }
-                }
+                Cell below = cell.FirstCellBelow;
+                if (below != null && !below.IsBusy && below.Item == null) item.Fall();
             }
         }
 
         private void DoFills()
         {
-            var spawner = ServiceProvider.GetCubeSpawner;
+            CubeSpawner spawner = ServiceProvider.GetCubeSpawner;
 
-            for (var i = 0; i < _fillingCells.Length; i++)
+            for (int i = 0; i < _fillingCells.Length; i++)
             {
-                var cell = _fillingCells[i];
+                Cell cell = _fillingCells[i];
                 if (cell == null) continue;
 
                 if (cell.Item == null)
@@ -84,28 +73,19 @@ namespace Core
                     Item item = null;
 
                     if (spawner != null)
-                    {
                         item = spawner.SpawnFromLevelData(_levelData, _board.ItemsParent);
-                    }
                     else
-                    {
-                        item = ItemFactory.CreateItem(
-                            _levelData.GetNextFillItemType(), _board.ItemsParent);
-                    }
+                        item = ItemFactory.CreateItem(_levelData.GetNextFillItemType(), _board.ItemsParent);
 
                     cell.Item = item;
 
-                    var offsetY = 0.0f;
-                    var targetCellBelow = cell.GetFallTarget().FirstCellBelow;
+                    float offsetY = 0.0f;
+                    Cell targetCellBelow = cell.GetFallTarget().FirstCellBelow;
                     if (targetCellBelow != null)
-                    {
                         if (targetCellBelow.Item != null)
-                        {
                             offsetY = targetCellBelow.Item.transform.position.y + 1;
-                        }
-                    }
 
-                    var p = cell.transform.position;
+                    Vector3 p = cell.transform.position;
                     p.y += 2;
                     p.y = p.y > offsetY ? p.y : offsetY;
 
@@ -123,8 +103,6 @@ namespace Core
             DoFills();
         }
 
-        private void Update()
-        {
-        }
+        private void Update() { }
     }
 }

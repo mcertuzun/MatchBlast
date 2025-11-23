@@ -4,14 +4,12 @@ namespace Core
 {
     public partial class Game : MonoBehaviour
     {
-        [Header("References")]
-        public Board Board;
+        [Header("References")] public Board Board;
         public FallAndFillManager FallAndFillManager;
         public ActionQueue ActionQueue;
         public Level Level;
 
-        [Header("Input")]
-        public Camera Camera;
+        [Header("Input")] public Camera Camera;
         public float CellSize = 1f;
 
         private float _time;
@@ -21,15 +19,7 @@ namespace Core
         private void Awake()
         {
             Instance = this;
-            if (Camera == null)
-            {
-                Camera = Camera.main;
-            }
-        }
-
-        private void Start()
-        {
-            // Level kendi Start'ında boardu hazırlar.
+            if (Camera == null) Camera = Camera.main;
         }
 
         private void Update()

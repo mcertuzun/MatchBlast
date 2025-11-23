@@ -1,7 +1,4 @@
 ﻿namespace Core
 {
-    public interface IProvidable
-    {
-        
-    }
+    public interface IProvidable { }
 }

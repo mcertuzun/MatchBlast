@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+
 namespace Core
 {
     public static class ServiceProvider
     {
-        private static readonly Dictionary<Type, IProvidable> RegisterDictionary = new Dictionary<Type, IProvidable>();
+        private static readonly Dictionary<Type, IProvidable> RegisterDictionary = new();
 
         public static T GetManager<T>() where T : class, IProvidable
         {
-            if (RegisterDictionary.ContainsKey(typeof(T)))
-            {
-                return (T) RegisterDictionary[typeof(T)];
-            }
+            if (RegisterDictionary.ContainsKey(typeof(T))) return (T)RegisterDictionary[typeof(T)];
 
             return null;
         }
@@ -21,28 +19,17 @@ namespace Core
             RegisterDictionary.Add(typeof(T), target);
             return target;
         }
-        
+
         /*
         public static ParticleManager GetParticleManager
         {
             get { return GetManager<ParticleManager>(); }
         }*/
 
-        public static ItemFallSystem GetItemFallSystem
-        {
-            get { return GetManager<ItemFallSystem>(); }
-        }
+        public static ItemFallSystem GetItemFallSystem => GetManager<ItemFallSystem>();
 
-        public static CubeSpawner GetCubeSpawner
-        {
-            get { return GetManager<CubeSpawner>(); }
-        }
+        public static CubeSpawner GetCubeSpawner => GetManager<CubeSpawner>();
 
-        public static Core.GameConfig GetGameConfig
-        {
-            get { return GetManager<Core.GameConfig>(); }
-        }
-
-
+        public static GameConfig GetGameConfig => GetManager<GameConfig>();
     }
 }

@@ -8,12 +8,9 @@ namespace Core
 
         public static Item CreateItem(ItemType itemType, Transform parent)
         {
-            if (_itemBasePrefab == null)
-            {
-                _itemBasePrefab = Resources.Load("ItemBase") as GameObject;
-            }
+            if (_itemBasePrefab == null) _itemBasePrefab = Resources.Load("ItemBase") as GameObject;
 
-            var go = Object.Instantiate(_itemBasePrefab, parent);
+            GameObject go = Object.Instantiate(_itemBasePrefab, parent);
 
             switch (itemType)
             {
@@ -22,21 +19,21 @@ namespace Core
                 case ItemType.BlueCube:
                 case ItemType.RedCube:
                 {
-                    var cube = go.AddComponent<CubeItem>();
+                    CubeItem cube = go.AddComponent<CubeItem>();
                     cube.PrepareCubeItem(itemType);
                     return cube;
                 }
 
                 case ItemType.Bomb:
                 {
-                    var bomb = go.AddComponent<BombItem>();
+                    BombItem bomb = go.AddComponent<BombItem>();
                     return bomb;
                 }
 
                 case ItemType.RocketH:
                 case ItemType.RocketV:
                 {
-                    var rocket = go.AddComponent<RocketItem>();
+                    RocketItem rocket = go.AddComponent<RocketItem>();
                     bool isHorizontal = itemType == ItemType.RocketH;
                     rocket.PrepareRocket(isHorizontal);
                     return rocket;

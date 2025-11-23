@@ -1,4 +1,3 @@
-
 namespace Core
 {
     public class LevelData_0 : LevelData
@@ -12,20 +11,12 @@ namespace Core
         {
             GridData = new ItemType[Board.Rows, Board.Cols];
 
-            for (var y = 0; y < Board.Rows; y++)
-            {
-                for (var x = 0; x < Board.Cols; x++)
-                {
-                    GridData[x, y] = GetRandomCubeItemType();
-                }
-            }
+            for (int y = 0; y < Board.Rows; y++)
+            for (int x = 0; x < Board.Cols; x++)
+                GridData[x, y] = GetRandomCubeItemType();
 
-            // Tüm kolonlar için en üst hücreyi "filling cell / spawner" yap
             FillingColumns = new bool[Board.Cols];
-            for (var x = 0; x < Board.Cols; x++)
-            {
-                FillingColumns[x] = true;
-            }
+            for (int x = 0; x < Board.Cols; x++) FillingColumns[x] = true;
         }
     }
 }

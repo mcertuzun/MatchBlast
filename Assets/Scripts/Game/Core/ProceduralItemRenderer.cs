@@ -22,17 +22,17 @@ namespace Core
                 Mesh = new Mesh();
                 Mesh.vertices = new Vector3[]
                 {
-                    new Vector3(-0.5f, -0.5f, 0f),
-                    new Vector3( 0.5f, -0.5f, 0f),
-                    new Vector3(-0.5f,  0.5f, 0f),
-                    new Vector3( 0.5f,  0.5f, 0f)
+                    new(-0.5f, -0.5f, 0f),
+                    new(0.5f, -0.5f, 0f),
+                    new(-0.5f, 0.5f, 0f),
+                    new(0.5f, 0.5f, 0f)
                 };
                 Mesh.uv = new Vector2[]
                 {
-                    new Vector2(0f, 0f),
-                    new Vector2(1f, 0f),
-                    new Vector2(0f, 1f),
-                    new Vector2(1f, 1f)
+                    new(0f, 0f),
+                    new(1f, 0f),
+                    new(0f, 1f),
+                    new(1f, 1f)
                 };
                 Mesh.triangles = new int[] { 0, 2, 1, 2, 3, 1 };
                 Mesh.RecalculateNormals();
@@ -44,47 +44,40 @@ namespace Core
             if (Board == null || Mesh == null || Material == null)
                 return;
 
-            var config = ServiceProvider.GetGameConfig;
+            GameConfig config = ServiceProvider.GetGameConfig;
             int rows = Board.boardData.rowCount;
             int cols = Board.boardData.columnCount;
 
             int count = 0;
 
             for (int y = 0; y < rows; y++)
+            for (int x = 0; x < cols; x++)
             {
-                for (int x = 0; x < cols; x++)
+                Cell cell = Board.Cells[x, y];
+                if (cell == null || !cell.HasItem())
+                    continue;
+
+                Item item = cell.Item;
+                if (item == null)
+                    continue;
+
+                Vector3 pos = cell.transform.position;
+                Vector3 itemPos = item.transform.position;
+                pos.y = itemPos.y;
+                pos.z = itemPos.z;
+
+                _matrices[count] = Matrix4x4.TRS(pos, Quaternion.identity, Vector3.one);
+                _colors[count] = GetColorForItem(item, config);
+
+                count++;
+                if (count == 1023)
                 {
-                    var cell = Board.Cells[x, y];
-                    if (cell == null || !cell.HasItem())
-                        continue;
-
-                    var item = cell.Item;
-                    if (item == null)
-                        continue;
-
-                    // position tam olarak cell pozisyonu ile hizalansin
-                    Vector3 pos = cell.transform.position;
-                    // Düşüş animasyonunda item transform'u y ekseninde oynatıyor, onu alalım
-                    var itemPos = item.transform.position;
-                    pos.y = itemPos.y;
-                    pos.z = itemPos.z;
-
-                    _matrices[count] = Matrix4x4.TRS(pos, Quaternion.identity, Vector3.one);
-                    _colors[count] = GetColorForItem(item, config);
-
-                    count++;
-                    if (count == 1023)
-                    {
-                        FlushBatch(count);
-                        count = 0;
-                    }
+                    FlushBatch(count);
+                    count = 0;
                 }
             }
 
-            if (count > 0)
-            {
-                FlushBatch(count);
-            }
+            if (count > 0) FlushBatch(count);
         }
 
         private void FlushBatch(int count)

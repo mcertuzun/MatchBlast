@@ -16,33 +16,25 @@ namespace Core
         public TextMesh LabelText;
 
         private Item _item;
+
         public Item Item
         {
-            get { return _item; }
+            get => _item;
             set
             {
                 if (_item == value) return;
 
-                var oldItem = _item;
+                Item oldItem = _item;
                 _item = value;
 
-                if (oldItem != null && Equals(oldItem.Cell, this))
-                {
-                    oldItem.Cell = null;
-                }
-                if (value != null)
-                {
-                    value.Cell = this;
-                }
+                if (oldItem != null && Equals(oldItem.Cell, this)) oldItem.Cell = null;
+                if (value != null) value.Cell = this;
             }
         }
 
         public int BusyTicks;
 
-        public bool IsBusy
-        {
-            get { return BusyTicks > 0; }
-        }
+        public bool IsBusy => BusyTicks > 0;
 
         public void Prepare(int x, int y, Board board)
         {
@@ -56,7 +48,7 @@ namespace Core
 
         private void UpdateLabel()
         {
-            var cellName = X + ":" + Y;
+            string cellName = X + ":" + Y;
             LabelText.text = cellName;
             gameObject.name = "Cell " + cellName;
         }
@@ -64,10 +56,10 @@ namespace Core
         private void UpdateNeighbours(Board board)
         {
             Neighbours = new List<Cell>();
-            var up = board.GetNeighbourWithDirection(this, Direction.Up);
-            var down = board.GetNeighbourWithDirection(this, Direction.Down);
-            var left = board.GetNeighbourWithDirection(this, Direction.Left);
-            var right = board.GetNeighbourWithDirection(this, Direction.Right);
+            Cell up = board.GetNeighbourWithDirection(this, Direction.Up);
+            Cell down = board.GetNeighbourWithDirection(this, Direction.Down);
+            Cell left = board.GetNeighbourWithDirection(this, Direction.Left);
+            Cell right = board.GetNeighbourWithDirection(this, Direction.Right);
 
             if (up != null) Neighbours.Add(up);
             if (down != null) Neighbours.Add(down);
@@ -79,13 +71,9 @@ namespace Core
 
         public Cell GetFallTarget()
         {
-            var targetCell = this;
-            while (targetCell.FirstCellBelow != null &&
-                   targetCell.FirstCellBelow.Item == null &&
-                   !targetCell.FirstCellBelow.IsBusy)
-            {
+            Cell targetCell = this;
+            while (targetCell.FirstCellBelow != null && targetCell.FirstCellBelow.Item == null && !targetCell.FirstCellBelow.IsBusy)
                 targetCell = targetCell.FirstCellBelow;
-            }
             return targetCell;
         }
 

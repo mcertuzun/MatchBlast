@@ -6,7 +6,7 @@ namespace Core
         {
             if (ActionQueue != null)
             {
-                var gravityAction = new PlayerAction
+                PlayerAction gravityAction = new()
                 {
                     Time = _time,
                     Type = ActionType.Gravity,

@@ -1,4 +1,3 @@
-
 namespace Core
 {
     public class CubeItem : Item

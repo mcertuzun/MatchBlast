@@ -10,20 +10,18 @@ namespace Core
         public bool IsFalling { get; internal set; }
 
         private Cell _cell;
+
         public Cell Cell
         {
-            get { return _cell; }
+            get => _cell;
             set
             {
                 if (_cell == value) return;
 
-                var oldCell = _cell;
+                Cell oldCell = _cell;
                 _cell = value;
 
-                if (oldCell != null && oldCell.Item == this)
-                {
-                    oldCell.Item = null;
-                }
+                if (oldCell != null && oldCell.Item == this) oldCell.Item = null;
 
                 if (value != null)
                 {
@@ -63,9 +61,7 @@ namespace Core
             return true;
         }
 
-        public virtual void afterFalled()
-        {
-        }
+        public virtual void afterFalled() { }
 
         public virtual bool CanBeExplodedByNeighbourMatch()
         {
@@ -80,10 +76,7 @@ namespace Core
 
         public void RemoveItem()
         {
-            if (Cell != null && Cell.Item == this)
-            {
-                Cell.Item = null;
-            }
+            if (Cell != null && Cell.Item == this) Cell.Item = null;
 
             Cell = null;
             IsDestroyed = true;
@@ -92,18 +85,12 @@ namespace Core
 
         public void Fall()
         {
-            if (!CanFall() || Cell == null)
-            {
-                return;
-            }
+            if (!CanFall() || Cell == null) return;
 
-            var targetCell = Cell.GetFallTarget();
-            if (targetCell == null || targetCell == Cell)
-            {
-                return;
-            }
+            Cell targetCell = Cell.GetFallTarget();
+            if (targetCell == null || targetCell == Cell) return;
 
-            var fallSystem = ServiceProvider.GetItemFallSystem;
+            ItemFallSystem fallSystem = ServiceProvider.GetItemFallSystem;
             if (fallSystem != null)
             {
                 fallSystem.StartFall(this, targetCell);
@@ -111,7 +98,7 @@ namespace Core
             else
             {
                 Cell = targetCell;
-                var p = transform.position;
+                Vector3 p = transform.position;
                 p.x = targetCell.transform.position.x;
                 p.y = targetCell.transform.position.y;
                 transform.position = p;
@@ -124,9 +111,7 @@ namespace Core
             return gameObject.name;
         }
 
-        public virtual void SetHinted(int hinted)
-        {
-        }
+        public virtual void SetHinted(int hinted) { }
 
         public virtual void SetParticle(ParticleSystem particle)
         {

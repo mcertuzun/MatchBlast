@@ -1,4 +1,3 @@
-
 namespace Core
 {
     public class BombItem : Item

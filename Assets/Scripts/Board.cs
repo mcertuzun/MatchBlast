@@ -5,7 +5,7 @@ namespace Core
 {
     public class Board : MonoBehaviour
     {
-        public  Cell[,] Cells= new Cell[Rows, Cols];
+        public Cell[,] Cells = new Cell[Rows, Cols];
         [SerializeField] public BoardData boardData;
         public Transform ItemsParent;
         public const int Rows = 9;
@@ -16,33 +16,28 @@ namespace Core
             CreateCells();
             PrepareCells();
         }
+
         private void CreateCells()
         {
             for (int y = 0; y < boardData.rowCount; y++)
+            for (int x = 0; x < boardData.columnCount; x++)
             {
-                for (int x = 0; x < boardData.columnCount; x++)
-                {
-                    var cell = Instantiate(boardData.cellPrefab);
-                    Cells[x, y] = cell;
-                }
+                Cell cell = Instantiate(boardData.cellPrefab);
+                Cells[x, y] = cell;
             }
         }
 
         private void PrepareCells()
         {
             for (int y = 0; y < boardData.rowCount; y++)
-            {
-                for (int x = 0; x < boardData.columnCount; x++)
-                {
-                    Cells[x, y].Prepare(x, y, this);
-                }
-            }
+            for (int x = 0; x < boardData.columnCount; x++)
+                Cells[x, y].Prepare(x, y, this);
         }
 
         public Cell GetNeighbourWithDirection(Cell cell, Direction direction)
         {
-            var x = cell.X;
-            var y = cell.Y;
+            int x = cell.X;
+            int y = cell.Y;
             switch (direction)
             {
                 case Direction.None:

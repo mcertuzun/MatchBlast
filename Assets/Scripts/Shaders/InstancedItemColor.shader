@@ -6,7 +6,10 @@ Shader "Custom/InstancedItemColor"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags
+        {
+            "RenderType"="Opaque"
+        }
         LOD 100
 
         Pass
@@ -32,7 +35,7 @@ Shader "Custom/InstancedItemColor"
                 UNITY_DEFINE_INSTANCED_PROP(float4, _BaseColor)
             UNITY_INSTANCING_BUFFER_END(Props)
 
-            v2f vert (appdata v)
+            v2f vert(appdata v)
             {
                 v2f o;
                 float4 worldPos = mul(unity_ObjectToWorld, v.vertex);
@@ -40,7 +43,7 @@ Shader "Custom/InstancedItemColor"
                 return o;
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            fixed4 frag(v2f i) : SV_Target
             {
                 fixed4 c = UNITY_ACCESS_INSTANCED_PROP(Props, _BaseColor);
                 return c;

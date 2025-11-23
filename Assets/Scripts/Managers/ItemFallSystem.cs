@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Core;
 using UnityEngine;
 
 namespace Core
@@ -15,17 +14,18 @@ namespace Core
             public float Elapsed;
         }
 
-        private readonly List<ActiveFall> _activeFalls = new List<ActiveFall>();
+        private readonly List<ActiveFall> _activeFalls = new();
 
-        [Header("Fall Tuning")]
-        [SerializeField] private float _cellsPerSecond = 8f;
+        [Header("Fall Tuning")] [SerializeField]
+        private float _cellsPerSecond = 8f;
+
         [SerializeField] private float _minDuration = 0.08f;
         [SerializeField] private float _maxDuration = 0.35f;
 
         private void Awake()
         {
             ServiceProvider.Register(this);
-            var config = ServiceProvider.GetGameConfig;
+            GameConfig config = ServiceProvider.GetGameConfig;
             if (config != null)
             {
                 _cellsPerSecond = config.FallCellsPerSecond;
@@ -36,13 +36,10 @@ namespace Core
 
         public void StartFall(Item item, Cell targetCell)
         {
-            if (item == null || targetCell == null)
-            {
-                return;
-            }
+            if (item == null || targetCell == null) return;
 
-            var startPos = item.transform.position;
-            var targetPos = targetCell.transform.position;
+            Vector3 startPos = item.transform.position;
+            Vector3 targetPos = targetCell.transform.position;
 
             if (Mathf.Approximately(startPos.y, targetPos.y))
             {
@@ -54,7 +51,7 @@ namespace Core
 
             for (int i = 0; i < _activeFalls.Count; i++)
             {
-                var f = _activeFalls[i];
+                ActiveFall f = _activeFalls[i];
                 if (f.Item == item)
                 {
                     f.StartPosition = item.transform.position;
@@ -70,7 +67,7 @@ namespace Core
             item.Cell = targetCell;
             item.IsFalling = true;
 
-            var fall = new ActiveFall
+            ActiveFall fall = new()
             {
                 Item = item,
                 StartPosition = startPos,
@@ -83,22 +80,19 @@ namespace Core
 
         private float ComputeDuration(Vector3 start, Vector3 target)
         {
-            var distance = Mathf.Abs(start.y - target.y);
-            if (distance < Mathf.Epsilon)
-            {
-                return _minDuration;
-            }
+            float distance = Mathf.Abs(start.y - target.y);
+            if (distance < Mathf.Epsilon) return _minDuration;
 
-            var duration = distance / Mathf.Max(_cellsPerSecond, 0.01f);
+            float duration = distance / Mathf.Max(_cellsPerSecond, 0.01f);
             return Mathf.Clamp(duration, _minDuration, _maxDuration);
         }
 
         private void Update()
         {
-            var dt = Time.deltaTime;
+            float dt = Time.deltaTime;
             for (int i = _activeFalls.Count - 1; i >= 0; i--)
             {
-                var fall = _activeFalls[i];
+                ActiveFall fall = _activeFalls[i];
 
                 if (fall.Item == null)
                 {
@@ -107,11 +101,11 @@ namespace Core
                 }
 
                 fall.Elapsed += dt;
-                var t = fall.Duration > 0f ? Mathf.Clamp01(fall.Elapsed / fall.Duration) : 1f;
+                float t = fall.Duration > 0f ? Mathf.Clamp01(fall.Elapsed / fall.Duration) : 1f;
 
-                var eased = t * t;
+                float eased = t * t;
 
-                var p = Vector3.Lerp(fall.StartPosition, fall.TargetPosition, eased);
+                Vector3 p = Vector3.Lerp(fall.StartPosition, fall.TargetPosition, eased);
                 fall.Item.transform.position = p;
 
                 if (t >= 1f)
