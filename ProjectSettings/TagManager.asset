@@ -3,8 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - CellCollider
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -41,13 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Cell
-    uniqueID: 3374479815
-    locked: 0
-  - name: Item
-    uniqueID: 1514491143
-    locked: 0
-  - name: UI
-    uniqueID: 3585050457
     locked: 0

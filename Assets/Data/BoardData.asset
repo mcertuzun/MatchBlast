@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c39491a30df46678bbe8af48f157c00, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fbdb69b41205c942ad5c4b533a458bc, type: 3}
   m_Name: BoardData
   m_EditorClassIdentifier: 
   rowCount: 9
   columnCount: 9
-  lenght: 0
-  cellPrefab: {fileID: 114338768054995410, guid: f17a161c1670044f9b71079e5003a477,
-    type: 3}
+  lenght: 9
+  cellPrefab: {fileID: 114338768054995410, guid: f17a161c1670044f9b71079e5003a477, type: 3}
