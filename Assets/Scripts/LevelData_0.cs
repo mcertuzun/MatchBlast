@@ -1,4 +1,3 @@
-using Core;
 
 namespace Core
 {
@@ -21,6 +20,7 @@ namespace Core
                 }
             }
 
+            // Tüm kolonlar için en üst hücreyi "filling cell / spawner" yap
             FillingColumns = new bool[Board.Cols];
             for (var x = 0; x < Board.Cols; x++)
             {

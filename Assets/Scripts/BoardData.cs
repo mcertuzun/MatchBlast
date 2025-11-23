@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Core;
+using UnityEngine;
 
 namespace Core
 {
@@ -7,6 +8,7 @@ namespace Core
     {
         public int rowCount;
         public int columnCount;
+        public float lenght;
         public Cell cellPrefab;
     }
 }

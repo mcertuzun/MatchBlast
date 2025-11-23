@@ -30,6 +30,10 @@ namespace Core
         public Color BombColor = new Color(0.9f, 0.2f, 0.2f);
         public Color RocketColor = new Color(0.6f, 0.0f, 1.0f);
 
+        [Header("Debug")]
+        public bool EnableCellGizmos = true;
+        public float CellGizmoSize = 0.9f;
+
         private void Awake()
         {
             ServiceProvider.Register(this);

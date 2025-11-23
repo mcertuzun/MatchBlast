@@ -1,10 +1,11 @@
+using Core;
 using UnityEngine;
 
 namespace Core
 {
     public class Level : MonoBehaviour 
     {
-        public LevelDataFactory.LevelName CurrentLevel;
+        public LevelName CurrentLevel;
         public Board Board;
         public FallAndFillManager FallAndFillManager;
         [Header("Deterministic Seed")]
@@ -80,9 +81,6 @@ namespace Core
             PrepareLevel();
             FallAndFillManager.Init(Board, _levelData);
             FallAndFillManager.StartFalls();
-
-            
-           Game.Instance.BeginRecording();
         }
 
         private void ClearBoardItems()
@@ -104,5 +102,18 @@ namespace Core
                 }
             }
         }
+    }
+
+    public enum LevelName
+    {
+        Level0,
+        Level1,
+        Level2,
+        Level3,
+        Level4,
+        Level5_1,
+        Level5_2,
+        LevelTest1,
+        LevelTest2
     }
 }

@@ -1,16 +1,18 @@
-﻿namespace Core
+﻿
+namespace Core
 {
     public static class LevelDataFactory
     {
-        public enum LevelName
-        {
-            Level0,
-            Level1,
-            Level2,
-        }
         public static LevelData CreateLevelData(LevelName levelName)
         {
-            LevelData levelData = new LevelData_0();
+            LevelData levelData = null;
+            switch (levelName)
+            {
+                case LevelName.Level0:
+                    levelData = new LevelData_0();
+                    break;
+            }
+
             levelData.Initialize();
             return levelData;
         }

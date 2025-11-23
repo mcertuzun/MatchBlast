@@ -1,8 +1,14 @@
+using System;
+
 namespace Core
 {
+    /// <summary>
+    /// Deterministik, seed tabanlı random servisi.
+    /// Level başında seed verilerek oyun tamamen replay edilebilir hale gelir.
+    /// </summary>
     public static class RandomService
     {
-        private static System.Random _random = new(12);
+        private static System.Random _random = new System.Random(12345);
 
         public static void SetSeed(int seed)
         {

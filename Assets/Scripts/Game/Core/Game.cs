@@ -9,6 +9,7 @@ namespace Core
         public FallAndFillManager FallAndFillManager;
         public ActionQueue ActionQueue;
         public Level Level;
+
         [Header("Input")]
         public Camera Camera;
         public float CellSize = 1f;
@@ -24,6 +25,11 @@ namespace Core
             {
                 Camera = Camera.main;
             }
+        }
+
+        private void Start()
+        {
+            // Level kendi Start'ında boardu hazırlar.
         }
 
         private void Update()

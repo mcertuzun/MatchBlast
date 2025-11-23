@@ -3,9 +3,9 @@
 [CreateAssetMenu(menuName = "ScriptableObjects/GameSetting", fileName ="GameSetting" )]
 public class GameSettings : ScriptableObject
 {
-    public int targetFrameRate = 60;
-    void Awake ()
-    {
-        Application.targetFrameRate = targetFrameRate;
-    }
+    public float targetFrameRate;
+    // void Awake ()
+    // {
+    //     Application.targetFrameRate = 60;
+    // }
 }

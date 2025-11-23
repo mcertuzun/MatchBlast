@@ -22,8 +22,27 @@ namespace Core
             return target;
         }
         
-        public static ItemFallSystem GetItemFallSystem => GetManager<ItemFallSystem>();
-        public static CubeSpawner GetCubeSpawner => GetManager<CubeSpawner>();
-        public static GameConfig GetGameConfig => GetManager<GameConfig>();
+        /*
+        public static ParticleManager GetParticleManager
+        {
+            get { return GetManager<ParticleManager>(); }
+        }*/
+
+        public static ItemFallSystem GetItemFallSystem
+        {
+            get { return GetManager<ItemFallSystem>(); }
+        }
+
+        public static CubeSpawner GetCubeSpawner
+        {
+            get { return GetManager<CubeSpawner>(); }
+        }
+
+        public static Core.GameConfig GetGameConfig
+        {
+            get { return GetManager<Core.GameConfig>(); }
+        }
+
+
     }
 }

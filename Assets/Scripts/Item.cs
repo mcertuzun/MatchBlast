@@ -48,6 +48,11 @@ namespace Core
             return false;
         }
 
+        public virtual bool CanBeExploring()
+        {
+            return false;
+        }
+
         public virtual bool CanBeMatchedByTouch()
         {
             return false;
@@ -117,6 +122,20 @@ namespace Core
         public override string ToString()
         {
             return gameObject.name;
+        }
+
+        public virtual void SetHinted(int hinted)
+        {
+        }
+
+        public virtual void SetParticle(ParticleSystem particle)
+        {
+            _particleSystem = particle;
+        }
+
+        public virtual ParticleSystem GetParticle()
+        {
+            return _particleSystem;
         }
     }
 }

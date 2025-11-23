@@ -1,3 +1,4 @@
+
 namespace Core
 {
     public class CubeItem : Item
@@ -49,6 +50,11 @@ namespace Core
         public override bool CanBeExplodedByNeighbourMatch()
         {
             return true;
+        }
+
+        public override bool TryExecute(MatchType matchType)
+        {
+            return base.TryExecute(matchType);
         }
     }
 }

@@ -39,7 +39,10 @@ namespace Core
 
         public int BusyTicks;
 
-        public bool IsBusy => BusyTicks > 0;
+        public bool IsBusy
+        {
+            get { return BusyTicks > 0; }
+        }
 
         public void Prepare(int x, int y, Board board)
         {

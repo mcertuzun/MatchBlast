@@ -400,7 +400,6 @@ GameObject:
   - component: {fileID: 238690312}
   - component: {fileID: 238690310}
   - component: {fileID: 238690314}
-  - component: {fileID: 238690317}
   - component: {fileID: 238690318}
   m_Layer: 0
   m_Name: Board
@@ -468,33 +467,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Board: {fileID: 238690310}
   FallAndFillManager: {fileID: 238690312}
---- !u!114 &238690317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 238690308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d616dc1dba505014da1aeb39e43d6e44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MinMatchForBlast: 2
-  MinMatchForBooster: 5
-  DefaultBusyDuration: 10
-  BombBusyDuration: 13
-  RocketBusyDuration: 13
-  GravityTicksBetweenActions: 1
-  FallCellsPerSecond: 8
-  FallMinDuration: 0.08
-  FallMaxDuration: 0.35
-  GreenColor: {r: 0, g: 1, b: 0, a: 1}
-  YellowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  BlueColor: {r: 0, g: 1, b: 1, a: 1}
-  RedColor: {r: 1, g: 0, b: 0, a: 1}
-  BombColor: {r: 0.9, g: 0.2, b: 0.2, a: 1}
-  RocketColor: {r: 0.6, g: 0, b: 1, a: 1}
 --- !u!114 &238690318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -969,8 +941,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2053444302}
   - component: {fileID: 2053444303}
-  - component: {fileID: 2053444304}
   - component: {fileID: 2053444305}
+  - component: {fileID: 2053444306}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -1010,24 +982,6 @@ MonoBehaviour:
   Board: {fileID: 238690310}
   FallAndFillManager: {fileID: 238690312}
   Seed: 12345
---- !u!114 &2053444304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2053444301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d63fd337f29c0e40b891e23a463d7b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GreenCubeSprite: {fileID: 21300000, guid: e41687578e4a44e39bb7ca0f4e790b90, type: 3}
-  YellowCubeSprite: {fileID: 21300000, guid: e41687578e4a44e39bb7ca0f4e790b90, type: 3}
-  BlueCubeSprite: {fileID: 21300000, guid: e41687578e4a44e39bb7ca0f4e790b90, type: 3}
-  RedCubeSprite: {fileID: 21300000, guid: 1b2f0de131ec74bd4a243b05e3e393e3, type: 3}
-  BombSprite: {fileID: 21300000, guid: 3c311f4889dfa4aefa26edda46533de4, type: 3}
-  RocketSprite: {fileID: 21300000, guid: bd19e5636305a4cb3a65d8f53b32d3db, type: 3}
 --- !u!114 &2053444305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1046,6 +1000,37 @@ MonoBehaviour:
   Level: {fileID: 2053444303}
   Camera: {fileID: 1225613437}
   CellSize: 1
+  OverrideGizmoToggle: 0
+  GizmosEnabledOverride: 1
+--- !u!114 &2053444306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053444301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d616dc1dba505014da1aeb39e43d6e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinMatchForBlast: 2
+  MinMatchForBooster: 5
+  DefaultBusyDuration: 10
+  BombBusyDuration: 13
+  RocketBusyDuration: 13
+  GravityTicksBetweenActions: 1
+  FallCellsPerSecond: 8
+  FallMinDuration: 0.08
+  FallMaxDuration: 0.35
+  GreenColor: {r: 0, g: 1, b: 0, a: 1}
+  YellowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  BlueColor: {r: 0, g: 1, b: 1, a: 1}
+  RedColor: {r: 1, g: 0, b: 0, a: 1}
+  BombColor: {r: 0.9, g: 0.2, b: 0.2, a: 1}
+  RocketColor: {r: 0.6, g: 0, b: 1, a: 1}
+  EnableCellGizmos: 1
+  CellGizmoSize: 0.9
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Core;
 using UnityEngine;
 
 namespace Core
@@ -38,6 +39,11 @@ namespace Core
         public void StartFalls()
         {
             _isActive = true;
+        }
+
+        public void StopFalls()
+        {
+            _isActive = false;
         }
 
         private void DoFalls()
@@ -115,6 +121,10 @@ namespace Core
             if (!_isActive) return;
             DoFalls();
             DoFills();
+        }
+
+        private void Update()
+        {
         }
     }
 }
